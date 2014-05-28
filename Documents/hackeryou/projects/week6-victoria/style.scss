@@ -1,21 +1,52 @@
 //VARIABLES
 $font: Lato, sans-serif;
-$transblack: rgba(4,0,10,0.7);
+$transblack: rgba(4,0,10,0.4);
 $black: rbg(4,0,10);
 $white: #E3E3E3; 
+$transwhite: rgba(245,243,242,0.5);
+$blue: #92CEDE;
 
 //MIXINS
 @mixin defaultstyle {
 	background: $transblack;
 	color: $white;
 	font-family: $font;
-	padding: 20px;
-	border-radius: 5px;
+	padding: 10px;
+	border-radius: 3px;
+}
+@mixin defaultstyle2 {
+	color: $white;
+	text-shadow: 2px 2px 2px $transblack;
+	font-family: $font;
+	font-style: italic;
 }
 @mixin noSurprises {
-	margin: 0;
-	padding: 5px;
+	// margin: 15px 0 15px 0;
+	padding: 3px;
 }
+@mixin formbordercolor {
+	border-left-color: $white;
+	border-right-color: $white;
+	border-top-color: $white;
+	border-bottom-color: $white;
+}
+@mixin formbordercolor2 {
+	border-left-color: $blue;
+	border-right-color: $blue;
+	border-top-color: $blue;
+	border-bottom-color: $blue;
+}
+@mixin formborder {
+	border-left-style: solid;
+	border-right-style: solid;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-left-width: 3px;
+	border-right-width: 3px;
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+}
+
 //GLOBAL
 article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:700;}dfn{font-style:italic;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace, serif;font-size:1em;}pre{white-space:pre-wrap;word-wrap:break-word;}q{quotes:\201C \201D \2018 \2019;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-.5em;}sub{bottom:-.25em;}img{border:0;}svg:not(:root){overflow:hidden;}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,html input[type=button],/* 1 */
 input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}button[disabled],input[disabled]{cursor:default;}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0;}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}body,figure{margin:0;}legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
@@ -35,11 +66,13 @@ body {
 html{
 	height: 100%;
 }
-h1,
-h2,
+span,
 p {
 	@include noSurprises;
+}
+p {
 	font-size: 1.5em;
+	line-height: 1.5;
 }
 //APP
 .wrapper {
@@ -54,56 +87,91 @@ p {
 //WEATHER/INFO/FORM DEFAULTS
 .weather,
 .art {
-	@include defaultstyle;
+	@include defaultstyle2;
+}
+.weather p,
+.art p {
+	background: $transblack;
+	display: inline;
+}
+.subwrapper {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+}
+.credit {
+	padding: 5px 0 0 0;
+	margin:0;
+	font-size: 0.7em;
+	@include defaultstyle2;
+	a {
+		text-decoration: none;
+		color: $blue;
+		&:hover {
+			font-size: 0.8;
+		}
+	}
 }
 .weather {
-	width: 350px;
-	position: absolute;
-	left: 20px;
-	bottom: 20px;
+	// width: 350px;
 }
 .art {
-	width: 200px;
-	position: absolute;
-	right: 0px;
-	bottom: 0px;
+	// width: 350px;
 }
 .form {
 	width: 350px;
 	@include defaultstyle;
-	margin: 0 auto;
+	// margin: 0 auto;
 	text-align: center;
 	position: absolute;
 	top: 20px;
 	left: 20px;
 }
 .form-label {
-	font-size: 2em;
+	font-size: 1.7em;
 }
-.text-box {
-	background: $white;
-	border: 2px solid $black;
-	border-radius: 2px;
-	width: 75%;
+input {
+	outline: 0;
+	margin: 10px;
+	background: transparent;
+}
+input[type="text"] {
+	// background: $white;
+	background-color: transparent; 
+	color: $white;
+	@include formborder;
+	border-radius: 3px;
+	width: 70%;
 	margin: 10px auto;
 	padding: 10px;
 }
-.text-box:hover {
-	
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="text"]:active,
+input[type="text"]:visited {
+	@include formborder;
+	@include formbordercolor2;
+	background-color: transparent;
 }
-.text-box:focus {
-
-}
+// input[type="text"]:focus {
+// 	@include formborder;
+// 	@include formbordercolor2;
+// 	background-color: transparent;
+// }
 .button {
-	background: $black;
+	background-color: transparent;
 	color: $white;
-	border: 2px solid $white;
+	@include formbordercolor;
+	@include formborder;
+	border-radius: 3px;
 	width: 20%;
 	padding: 10px;
-	border: 0;
+	outline: 0;
 }
 .button:hover {
-	background: $white;
-	color: $black;
-	border: 2px solid $white;
+	background-color: transparent;
+	color: $blue;
+	@include formborder;
+	@include formbordercolor2;
+	outline: 0;
 }
